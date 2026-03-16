@@ -3,7 +3,7 @@ name = "Codeep"
 version = "0.0.1"
 schema_version = 1
 authors = ["Vlado Ivankovic <vlado@codeep.dev>"]
-description = "AI coding assistant with multi-provider LLM support (Anthropic, OpenAI, Gemini, and more)"
+description = "AI coding agent built for the terminal. Multiple LLMs, each optimized for your development workflow."
 repository = "https://github.com/VladoIvankovic/codeep-zed"
 
 [agent_servers.codeep]
