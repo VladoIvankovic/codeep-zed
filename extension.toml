@@ -1,0 +1,30 @@
+id = "codeep"
+name = "Codeep"
+version = "0.0.1"
+schema_version = 1
+authors = ["Vlado Ivankovic <vlado@codeep.dev>"]
+description = "AI coding assistant with multi-provider LLM support (Anthropic, OpenAI, Gemini, and more)"
+repository = "https://github.com/VladoIvankovic/codeep-zed"
+
+[agent_servers.codeep]
+name = "Codeep"
+
+[agent_servers.codeep.targets.darwin-aarch64]
+archive = "https://github.com/VladoIvankovic/codeep-zed/releases/download/v0.0.1/codeep-darwin-aarch64.tar.gz"
+cmd = "codeep"
+args = ["acp"]
+
+[agent_servers.codeep.targets.darwin-x86_64]
+archive = "https://github.com/VladoIvankovic/codeep-zed/releases/download/v0.0.1/codeep-darwin-x86_64.tar.gz"
+cmd = "codeep"
+args = ["acp"]
+
+[agent_servers.codeep.targets.linux-x86_64]
+archive = "https://github.com/VladoIvankovic/codeep-zed/releases/download/v0.0.1/codeep-linux-x86_64.tar.gz"
+cmd = "codeep"
+args = ["acp"]
+
+[agent_servers.codeep.targets.linux-aarch64]
+archive = "https://github.com/VladoIvankovic/codeep-zed/releases/download/v0.0.1/codeep-linux-aarch64.tar.gz"
+cmd = "codeep"
+args = ["acp"]

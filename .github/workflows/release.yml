@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build binaries
+    runs-on: ubuntu-latest
+    steps:
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Checkout codeep
+        uses: actions/checkout@v4
+        with:
+          repository: VladoIvankovic/Codeep
+          path: codeep
+
+      - name: Install dependencies
+        working-directory: codeep
+        run: bun install --frozen-lockfile
+
+      - name: Build TypeScript
+        working-directory: codeep
+        run: bun run build
+
+      - name: Compile binaries
+        working-directory: codeep
+        run: |
+          mkdir -p dist/zed
+          bun build --compile --target=bun-darwin-arm64  dist/renderer/main.js --outfile dist/zed/codeep-darwin-aarch64
+          bun build --compile --target=bun-darwin-x64    dist/renderer/main.js --outfile dist/zed/codeep-darwin-x86_64
+          bun build --compile --target=bun-linux-x64     dist/renderer/main.js --outfile dist/zed/codeep-linux-x86_64
+          bun build --compile --target=bun-linux-arm64   dist/renderer/main.js --outfile dist/zed/codeep-linux-aarch64
+
+      - name: Create archives
+        working-directory: codeep/dist/zed
+        run: |
+          tar -czf codeep-darwin-aarch64.tar.gz codeep-darwin-aarch64
+          tar -czf codeep-darwin-x86_64.tar.gz  codeep-darwin-x86_64
+          tar -czf codeep-linux-x86_64.tar.gz   codeep-linux-x86_64
+          tar -czf codeep-linux-aarch64.tar.gz  codeep-linux-aarch64
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            codeep/dist/zed/codeep-darwin-aarch64.tar.gz
+            codeep/dist/zed/codeep-darwin-x86_64.tar.gz
+            codeep/dist/zed/codeep-linux-x86_64.tar.gz
+            codeep/dist/zed/codeep-linux-aarch64.tar.gz
