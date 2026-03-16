@@ -8,6 +8,7 @@ repository = "https://github.com/VladoIvankovic/codeep-zed"
 
 [agent_servers.codeep]
 name = "Codeep"
+icon = "Codeep.svg"
 
 [agent_servers.codeep.targets.darwin-aarch64]
 archive = "https://github.com/VladoIvankovic/codeep-zed/releases/download/v0.0.1/codeep-darwin-aarch64.tar.gz"
